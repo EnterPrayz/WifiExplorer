@@ -70,7 +70,7 @@ public class ActivityMain extends Activity implements
         iniFragments();
         startFragment(choiseFragment(localWificlient.getWifiModuleMode()));
     }
-//
+
     @Override
     protected void onResume() {
         super.onResume();
