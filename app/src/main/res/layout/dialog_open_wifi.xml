@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_input_pass_wifi_open_wifi"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter password"
+            />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_marginTop="16dp"
+            android:id="@+id/btn_ok_wifi_open_wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:imeOptions="actionDone"
+            android:text="Ok"
+            android:layout_margin="5dp" />
+
+
+        <Button
+            android:layout_marginTop="16dp"
+            android:id="@+id/btn_cancel_wifi_open_wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:imeOptions="actionDone"
+            android:text="Cancel"
+            android:layout_margin="5dp" />
+
+
+    </LinearLayout>
+    
+</LinearLayout>

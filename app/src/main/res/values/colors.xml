@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="wifi_item_title_color">#ff6d6d6d</color>
+    <color name="wifi_item_sub_title_color">#ff4b4b4b</color>
+    <color name="wifi_item_background_color">#ff232323</color>
+
+
+    <color name="transparent">#00000000</color>
+    <color name="transparent20">#20000000</color>
+
+    <color name="progress_start">#8e0052ff</color>
+    <color name="progress_end">#00000000</color>
+
+
+</resources>

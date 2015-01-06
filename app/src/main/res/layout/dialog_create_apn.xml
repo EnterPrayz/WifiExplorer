@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_input_apn_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter APN name " />
+
+                <CheckBox
+                    android:id="@+id/chbx_need_to_hide"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="need hide" />
+
+                <Spinner
+                    android:id="@+id/sp_security_list"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_container_to_hide"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/et_input_apn_pass"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter APN 8 characters password " />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_marginTop="16dp"
+                    android:id="@+id/btn_ok_wifi_open_apn"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="48dp"
+                    android:imeOptions="actionDone"
+                    android:text="Ok"
+                    android:layout_margin="5dp" />
+
+
+                <Button
+                    android:layout_marginTop="16dp"
+                    android:id="@+id/btn_cancel_wifi_open_apn"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="48dp"
+                    android:imeOptions="actionDone"
+                    android:text="Cancel"
+                    android:layout_margin="5dp" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

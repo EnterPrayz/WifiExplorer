@@ -1,0 +1,25 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <!--Wifi list item style-->
+    <style name="WifiItemTextStyle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="StyleWifiSubTitleNonSelected" parent="WifiItemTextStyle">
+       <item name="android:textColor">@color/wifi_item_title_color</item>
+        <item name="android:textSize">@dimen/wifi_item_sub_title_size</item>
+    </style>
+
+    <style name="StyleWifiTitleNonSelected" parent="WifiItemTextStyle">
+       <item name="android:textColor">@color/wifi_item_sub_title_color</item>
+        <item name="android:textSize">@dimen/wifi_item_title_size</item>
+    </style>
+
+
+</resources>

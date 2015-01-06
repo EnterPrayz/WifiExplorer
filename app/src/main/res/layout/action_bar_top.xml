@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="48dp"
+    android:background="@drawable/action_bar">
+
+
+    <Switch
+        android:id="@+id/swc_check_wifi_module"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:thumb="@drawable/apptheme_switch_inner_holo_dark"
+        android:track="@drawable/apptheme_switch_track_holo_dark"
+        android:textOn=" "
+        android:textOff=" "
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Switch
+        android:id="@+id/swc_check_apn"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:thumb="@drawable/apptheme_switch_inner_holo_dark"
+        android:track="@drawable/apptheme_switch_track_holo_dark"
+        android:textOn=" "
+        android:textOff=" "
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
