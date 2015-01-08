@@ -53,7 +53,7 @@ public class ApnViewFragment extends Fragment {
         super.onPause();
         localWificlient.stopAPNScanMonitor();
     }
-
+//
     @Override
     public void onStop() {
         super.onStop();
