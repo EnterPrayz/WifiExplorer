@@ -7,6 +7,6 @@
     <!--Wifi item style dimen-->
     <dimen name="wifi_item_title_size">22sp</dimen>
     <dimen name="wifi_item_sub_title_size">16sp</dimen>
-
+    <dimen name="wifi_item_vendor_size">10sp</dimen>
 
 </resources>

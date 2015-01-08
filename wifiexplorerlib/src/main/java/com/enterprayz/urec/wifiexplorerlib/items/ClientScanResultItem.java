@@ -20,14 +20,14 @@ public class ClientScanResultItem {
 
 	private String IpAddr;
 	private String HWAddr;
-	private String Device;
+	private String DeviceVendorName;
 	private boolean isReachable;
 
-	public ClientScanResultItem(String ipAddr, String hWAddr, String device, boolean isReachable) {
+	public ClientScanResultItem(String ipAddr, String hWAddr, String deviceVendorName, boolean isReachable) {
 		super();
 		this.IpAddr = ipAddr;
 		this.HWAddr = hWAddr;
-		this.Device = device;
+		this.DeviceVendorName = deviceVendorName;
 		this.isReachable = isReachable;
 	}
 
@@ -47,11 +47,11 @@ public class ClientScanResultItem {
 	}
 
 	
-	public String getDevice() {
-		return Device;
+	public String getDeviceVendorName() {
+		return DeviceVendorName;
 	}
-	public void setDevice(String device) {
-		Device = device;
+	public void setDeviceVendorName(String deviceVendorName) {
+		DeviceVendorName = deviceVendorName;
 	}
 
 	

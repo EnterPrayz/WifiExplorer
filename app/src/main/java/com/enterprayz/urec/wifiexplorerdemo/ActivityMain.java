@@ -33,6 +33,7 @@ import com.enterprayz.urec.wifiexplorerlib.interfaces.OnNETCheckListener;
 import com.enterprayz.urec.wifiexplorerlib.interfaces.OnWifiModuleCheckListener;
 import com.enterprayz.urec.wifiexplorerlib.items.ClientScanResultItem;
 import com.enterprayz.urec.wifiexplorerlib.items.WifiScanResultsItem;
+import com.enterprayz.urec.wifiexplorerlib.utils.Packager;
 import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.WifiKeyOptions;
 
 import java.util.ArrayList;
@@ -83,6 +84,12 @@ public class ActivityMain extends Activity implements
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        localWificlient.onDestroy();
+        super.onDestroy();
     }
 
     @Override

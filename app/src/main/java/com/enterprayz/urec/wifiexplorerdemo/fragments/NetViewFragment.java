@@ -135,7 +135,7 @@ public class NetViewFragment extends Fragment {
                 if (localWificlient == null) {
                     iniWifiClient();
                 }
-                if (localWificlient.getAutoScanCheck()) {
+                if (localWificlient.getAutoScanCheckNetwork()) {
                     localWificlient.stopAutoScanNetwork();
                 }
                 adapter.removeAll();
@@ -145,7 +145,7 @@ public class NetViewFragment extends Fragment {
                 if (localWificlient == null) {
                     iniWifiClient();
                 }
-                if (!localWificlient.getAutoScanCheck()) {
+                if (!localWificlient.getAutoScanCheckNetwork()) {
                     localWificlient.autoScanNetwork(2000);
                 }
 

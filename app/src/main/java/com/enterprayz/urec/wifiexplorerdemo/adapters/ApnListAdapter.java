@@ -24,6 +24,7 @@ public class ApnListAdapter extends BaseAdapter {
     static class Holder {
         public TextView tvIpAddress;
         public TextView tvHardAddress;
+        public TextView tvItemVendorName;
 
     }
 
@@ -94,7 +95,6 @@ public class ApnListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         APNClientListItem item = items.get(position);
-
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_apn_list, null);
             holder = new Holder();
@@ -102,14 +102,15 @@ public class ApnListAdapter extends BaseAdapter {
                     .findViewById(R.id.tv_item_hard_address);
             holder.tvIpAddress = (TextView) convertView
                     .findViewById(R.id.tv_item_ip_address);
+            holder.tvItemVendorName = (TextView) convertView
+                    .findViewById(R.id.tv_item_vendor_name);
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
         }
         holder.tvHardAddress.setText(item.getHWAddr());
         holder.tvIpAddress.setText(item.getIpAddr());
-
-
+        holder.tvItemVendorName.setText(item.getDeviceVendor());
         return convertView;
 
     }

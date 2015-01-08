@@ -72,7 +72,6 @@ public class ClientCore {
 
     public void createAp(WifiConfiguration configuration) {
         apManager.setApNetworkEnable(configuration, true);
-        apManager.setAPNScanMonitor(4000, true);
     }
 
     public void closeAP() {
@@ -82,6 +81,14 @@ public class ClientCore {
                 apManager.closeApNetwork(getWifiApState());
             }
         }).start();
+    }
+
+    public void setScanMonitorState (boolean enable, int dellay){
+        apManager.setAPNScanMonitor(dellay,enable);
+    }
+
+    public boolean getScanMonitorState (){
+       return apManager.getScanMonitorState();
     }
 
     public WifiConfiguration getLastAPNConfiguration (){

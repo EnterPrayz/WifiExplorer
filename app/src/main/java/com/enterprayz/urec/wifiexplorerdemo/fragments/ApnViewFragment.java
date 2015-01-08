@@ -45,11 +45,18 @@ public class ApnViewFragment extends Fragment {
         super.onResume();
         iniWifiClient();
         localWificlient.getAPNUsers();
+        localWificlient.startAPNScanMonitor(4000);
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        localWificlient.stopAPNScanMonitor();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 
     @Override
@@ -65,6 +72,7 @@ public class ApnViewFragment extends Fragment {
         iniListeners();
         iniWifiClient();
     }
+
 
     private void iniUi() {
         tvApnSsidTitleApnViewFragment = (TextView) getActivity().findViewById(R.id.tv_apn_ssid_title_apn_view_fragment);
@@ -119,7 +127,7 @@ public class ApnViewFragment extends Fragment {
                             adapter.addItem(new APNClientListItem(
                                     userItem.getIpAddr(),
                                     userItem.getHWAddr(),
-                                    userItem.getDevice(),
+                                    userItem.getDeviceVendorName(),
                                     userItem.isReachable()
                             ));
                         }

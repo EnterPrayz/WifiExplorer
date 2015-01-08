@@ -1,9 +1,12 @@
 package com.enterprayz.urec.wifiexplorerlib.core;
 
+import android.app.Activity;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.wifi.WifiConfiguration;
 import android.util.Log;
 
+import com.enterprayz.urec.wifiexplorerlib.database.DbMain;
 import com.enterprayz.urec.wifiexplorerlib.enum_state.WIFI_APN_STATE;
 import com.enterprayz.urec.wifiexplorerlib.enum_state.WIFI_MODULE_MODE;
 import com.enterprayz.urec.wifiexplorerlib.enum_state.WIFI_MODULE_STATE;
@@ -29,13 +32,14 @@ public class WifiClientModel {
     private static ClientCore core;
     private Context context;
     private static WifiClientModel mInstance;
-
+    private static SQLiteDatabase database;
 
     //Listeners
 
 
     private static OnWifiModuleCheckListener wifiModuleCheckListener;
     private boolean isAutoScanEnable;
+
 
     /**
      * Set listener.
@@ -93,7 +97,15 @@ public class WifiClientModel {
     //Body
     private WifiClientModel(Context context) {
         this.context = context;
-        this.core = new ClientCore(this.context);
+        core = new ClientCore(this.context);
+    }
+
+
+    public void onDestroy() {
+        if (database != null) {
+            database.close();
+            database = null;
+        }
     }
 
     /**
@@ -104,6 +116,9 @@ public class WifiClientModel {
     public static WifiClientModel getInstance(Context context) {
         if (mInstance == null) {
             mInstance = new WifiClientModel(context);
+        }
+        if (database == null) {
+            database = new DbMain(context).openDatabase();
         }
         return mInstance;
     }
@@ -117,11 +132,13 @@ public class WifiClientModel {
 
     /**
      * Get Wifi module state
+     *
      * @return {@link boolean} is tunr on/off
      */
     public boolean isWifiModuleEnabled() {
         return core.isWifiModuleEnabled();
     }
+
     /**
      * Scan wifi for new networks. The results is returning in {@link OnNETCheckListener} .onNetworkScanResult.
      */
@@ -131,6 +148,7 @@ public class WifiClientModel {
 
     /**
      * Set auto scan monitor for new networks. The results is returning in {@link OnNETCheckListener} .onNetworkScanResult. Remember, android system scan wifi network  without you.
+     *
      * @param dellay through in which time  scan network.
      */
     public void autoScanNetwork(final int dellay) {
@@ -152,7 +170,7 @@ public class WifiClientModel {
 
     /**
      * Stop scan monitor
-     * */
+     */
     public void stopAutoScanNetwork() {
         if (isAutoScanEnable) {
             isAutoScanEnable = false;
@@ -164,7 +182,7 @@ public class WifiClientModel {
      *
      * @return <code>boolean</code> - scanner state
      */
-    public boolean getAutoScanCheck() {
+    public boolean getAutoScanCheckNetwork() {
         return isAutoScanEnable;
     }
 
@@ -174,7 +192,8 @@ public class WifiClientModel {
      * @param options {@link WifiKeyOptions} configured wifi options.
      */
     public void connectToNetwork(WifiKeyOptions options) {
-        WifiConfiguration configuration = new WifiOptionsBuilder().getConfig(options);
+        WifiConfiguration configuration
+                = new WifiOptionsBuilder().getConfig(options);
         core.connectToNetwork(configuration);
     }
 
@@ -228,6 +247,27 @@ public class WifiClientModel {
     }
 
     /**
+     * Set APN scanner enabled. Check for user change state.
+     *
+     */
+    public void startAPNScanMonitor(int dellay) {
+        core.setScanMonitorState(true, dellay);
+    }
+    /**
+     * Set APN scanner disabled.
+     *
+     */
+    public void stopAPNScanMonitor() {
+        core.setScanMonitorState(false, 0);
+    }
+    /**
+     * Get APN scanner state.
+     *
+     */
+    public boolean getAPNScanMonitorState() {
+        return core.getScanMonitorState();
+    }
+    /**
      * Get wifi module mode.
      *
      * @return {@link WIFI_MODULE_MODE} wifi module mode.
@@ -272,7 +312,6 @@ public class WifiClientModel {
     /**
      * Get all networks.
      *
-     *
      * @return {@link ArrayList<WifiScanResultsItem>} wifi available networks.
      */
     public ArrayList<WifiScanResultsItem> getAllNetwork() {
@@ -282,6 +321,10 @@ public class WifiClientModel {
     //Anonymous class. Contains actions of singleton.
     static class Actions {
         private static String TAG = Actions.class.getName();
+
+        public static SQLiteDatabase getSingletoneDatabase() {
+            return database;
+        }
 
         public static void setOnWifiModuleEnableCheck(WIFI_MODULE_STATE state) {
             if (wifiModuleCheckListener != null) {

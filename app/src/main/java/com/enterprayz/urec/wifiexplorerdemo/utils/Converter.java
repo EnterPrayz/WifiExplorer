@@ -100,7 +100,7 @@ public class Converter {
                     list.add(new APNClientListItem(
                             item.getIpAddr(),
                             item.getHWAddr(),
-                            item.getDevice(),
+                            item.getDeviceVendorName(),
                             item.isReachable()
                     ));
                 }

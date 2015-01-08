@@ -6,6 +6,7 @@ import android.net.wifi.WifiManager;
 import android.util.Log;
 
 import com.enterprayz.urec.wifiexplorerlib.enum_state.WIFI_APN_STATE;
+import com.enterprayz.urec.wifiexplorerlib.helpers.DbActionHelper;
 import com.enterprayz.urec.wifiexplorerlib.items.ClientScanResultItem;
 
 import java.io.BufferedReader;
@@ -119,6 +120,10 @@ public class ApHelperManager {
         }).start();
     }
 
+    public boolean getScanMonitorState() {
+        return scanMonitorEnable;
+    }
+
     private void getClientsChangeList(final int reachableTimeout,
                                       final boolean isMonitorScan) {
         if (isMonitorScan) {
@@ -189,8 +194,9 @@ public class ApHelperManager {
 
                     if (mac.matches("..:..:..:..:..:..")) {
                         boolean isReachable = InetAddress.getByName(splitted[0]).isReachable(reachableTimeout);
-                        String deviceName = InetAddress.getByName(splitted[0]).getHostName();
-                        ClientScanResultItem resultItem = new ClientScanResultItem(splitted[0], splitted[3], deviceName, isReachable);
+                        DbActionHelper actionHelper = new DbActionHelper(context, WifiClientModel.Actions.getSingletoneDatabase());
+                        String deviceVendorName = actionHelper.getDeviceVendor(splitted[3]);
+                        ClientScanResultItem resultItem = new ClientScanResultItem(splitted[0], splitted[3], deviceVendorName, isReachable);
                         list.add(resultItem);
 
                     }

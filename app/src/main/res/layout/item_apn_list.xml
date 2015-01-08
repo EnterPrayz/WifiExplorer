@@ -8,7 +8,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:background="@color/transparent20"
-        android:layout_height="70dp">
+        android:layout_height="90dp">
 
         <LinearLayout
             android:layout_weight="1"
@@ -28,6 +28,10 @@
                 style="@style/StyleWifiSubTitleNonSelected"
                 android:text="Sub item name" />
 
+            <TextView
+                android:id="@+id/tv_item_vendor_name"
+                style="@style/StyleWifiVendorNonSelected"
+                android:text="Sub item vendor" />
         </LinearLayout>
 
     </LinearLayout>

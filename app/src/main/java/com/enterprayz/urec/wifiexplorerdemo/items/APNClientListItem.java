@@ -6,14 +6,14 @@ package com.enterprayz.urec.wifiexplorerdemo.items;
 public class APNClientListItem {
     private String IpAddr;
     private String HWAddr;
-    private String Device;
+    private String DeviceVendor;
     private boolean isReachable;
 
-    public APNClientListItem(String ipAddr, String hWAddr, String device, boolean isReachable) {
+    public APNClientListItem(String ipAddr, String hWAddr, String deviceVendor, boolean isReachable) {
         super();
         this.IpAddr = ipAddr;
         this.HWAddr = hWAddr;
-        this.Device = device;
+        this.DeviceVendor = deviceVendor;
         this.isReachable = isReachable;
     }
 
@@ -35,12 +35,12 @@ public class APNClientListItem {
     }
 
 
-    public String getDevice() {
-        return Device;
+    public String getDeviceVendor() {
+        return DeviceVendor;
     }
 
-    public void setDevice(String device) {
-        Device = device;
+    public void setDeviceVendor(String deviceVendor) {
+        DeviceVendor = deviceVendor;
     }
 
 

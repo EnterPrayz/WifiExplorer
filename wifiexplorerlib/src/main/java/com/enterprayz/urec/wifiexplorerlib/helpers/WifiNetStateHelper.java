@@ -11,7 +11,6 @@ import com.enterprayz.urec.wifiexplorerlib.helpers.hash_keys.StateLowerJellyBean
  * Created by con on 24.12.14.
  */
 public class WifiNetStateHelper {
-
     public static WIFI_NET_STATE getNetStateByDetailStateHashKey(DetailedState detailedState) {
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
         WIFI_NET_STATE state;
@@ -22,7 +21,5 @@ public class WifiNetStateHelper {
         }
         return state;
     }
-
-
 }
 
