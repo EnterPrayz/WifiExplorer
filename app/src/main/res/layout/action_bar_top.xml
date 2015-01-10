@@ -7,10 +7,10 @@
 
     <Switch
         android:id="@+id/swc_check_wifi_module"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:thumb="@drawable/apptheme_switch_inner_holo_dark"
-        android:track="@drawable/apptheme_switch_track_holo_dark"
+        android:thumb="@drawable/switch_wifi_inner_holo_dark"
+        android:track="@drawable/switch_track_holo_dark"
         android:textOn=" "
         android:textOff=" "
         android:layout_centerVertical="true"
@@ -19,10 +19,10 @@
 
     <Switch
         android:id="@+id/swc_check_apn"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:thumb="@drawable/apptheme_switch_inner_holo_dark"
-        android:track="@drawable/apptheme_switch_track_holo_dark"
+        android:thumb="@drawable/switch_apn_inner_holo_dark"
+        android:track="@drawable/switch_track_holo_dark"
         android:textOn=" "
         android:textOff=" "
         android:layout_centerVertical="true"
