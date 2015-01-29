@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/disconnect_connected_menu_dialog"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Disconnect" />
+
+    <Button
+        android:id="@+id/wifi_info_connected_menu_dialog"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Wifi Info" />
+    <Button
+        android:id="@+id/scan_wifi_connected_menu_dialog"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Scan wifi" />
+</LinearLayout>

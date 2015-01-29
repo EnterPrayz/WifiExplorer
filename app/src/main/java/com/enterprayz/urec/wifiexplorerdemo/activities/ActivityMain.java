@@ -1,10 +1,11 @@
-package com.enterprayz.urec.wifiexplorerdemo;
+package com.enterprayz.urec.wifiexplorerdemo.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,8 +15,10 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 
+import com.enterprayz.urec.wifiexplorerdemo.R;
 import com.enterprayz.urec.wifiexplorerdemo.fragments.ApnViewFragment;
 import com.enterprayz.urec.wifiexplorerdemo.fragments.MainFragment;
 import com.enterprayz.urec.wifiexplorerdemo.fragments.NetViewFragment;
@@ -33,7 +36,6 @@ import com.enterprayz.urec.wifiexplorerlib.interfaces.OnNETCheckListener;
 import com.enterprayz.urec.wifiexplorerlib.interfaces.OnWifiModuleCheckListener;
 import com.enterprayz.urec.wifiexplorerlib.items.ClientScanResultItem;
 import com.enterprayz.urec.wifiexplorerlib.items.WifiScanResultsItem;
-import com.enterprayz.urec.wifiexplorerlib.utils.Packager;
 import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.WifiKeyOptions;
 
 import java.util.ArrayList;
@@ -53,6 +55,7 @@ public class ActivityMain extends Activity implements
     private ApnViewFragment apnViewFragment;
     private MainFragment mainFragment;
     private boolean needEnableWifi = false;
+    private ImageView ivScanLocalNetwork;
 
 
     @Override
@@ -79,6 +82,14 @@ public class ActivityMain extends Activity implements
         if (swcCheckWifiModule != null) {
             swcCheckWifiModule.setChecked(localWificlient.isWifiModuleEnabled());
         }
+        if (ivScanLocalNetwork != null) {
+            if (localWificlient.getNETState().equals(WIFI_NET_STATE.CONNECTED)) {
+                ivScanLocalNetwork.setVisibility(View.VISIBLE);
+            } else {
+                ivScanLocalNetwork.setVisibility(View.GONE);
+            }
+
+        }
     }
 
     @Override
@@ -91,6 +102,8 @@ public class ActivityMain extends Activity implements
         localWificlient.onDestroy();
         super.onDestroy();
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -147,7 +160,7 @@ public class ActivityMain extends Activity implements
         ft.replace(R.id.content_frame, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack(null);
-        ft.commit();
+        ft.commitAllowingStateLoss();
     }
 
     private void iniActionBar() {
@@ -200,6 +213,13 @@ public class ActivityMain extends Activity implements
                 }
             }
         });
+        ivScanLocalNetwork = (ImageView) v.findViewById(R.id.iv_scan_local_network);
+        ivScanLocalNetwork.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), LocalNetworkScanActivity.class));
+            }
+        });
         ab.setCustomView(v);
     }
 
@@ -213,6 +233,7 @@ public class ActivityMain extends Activity implements
                 break;
             }
             case WIFI_MODULE_STATE_ENABLED: {
+
                 startFragment(choiseFragment(WIFI_MODULE_MODE.NET_MODE));
                 break;
             }
@@ -231,12 +252,22 @@ public class ActivityMain extends Activity implements
 
     @Override
     public void onNetCheckChange(WIFI_NET_STATE state) {
+        switch (state) {
+            case CONNECTED: {
+                ivScanLocalNetwork.startAnimation(getSwypeLeftToRightINAnimation(ivScanLocalNetwork));
+                break;
+            }
 
+            case DISCONNECTED: {
+                ivScanLocalNetwork.startAnimation(getSwypeRightToLeftOUTAnimation(ivScanLocalNetwork));
+                break;
+            }
+        }
     }
 
     @Override
     public void onNetworkScanResult(ArrayList<WifiScanResultsItem> results) {
-        if (netViewFragment != null) {
+        if (netViewFragment != null && results != null) {
             netViewFragment.onNetworkScanResult(results);
         }
     }

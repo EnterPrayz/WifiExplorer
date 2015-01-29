@@ -5,6 +5,7 @@ package com.enterprayz.urec.wifiexplorerdemo.fragments;
  */
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.enterprayz.urec.wifiexplorerdemo.R;
+import com.enterprayz.urec.wifiexplorerdemo.activities.LocalNetworkScanActivity;
 import com.enterprayz.urec.wifiexplorerdemo.adapters.WifiListAdapter;
+import com.enterprayz.urec.wifiexplorerdemo.fragments.dialog.ConnectedDialogMenu;
 import com.enterprayz.urec.wifiexplorerdemo.fragments.dialog.OpenWifiDialog;
 import com.enterprayz.urec.wifiexplorerdemo.items.WifiListItem;
 import com.enterprayz.urec.wifiexplorerdemo.utils.Converter;
@@ -25,7 +28,7 @@ import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.WepNETKeyOption;
 import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.WifiKeyOptions;
 import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.Wpa2NETKeyOption;
 import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.WpaNETKeyOption;
-import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptionsBuilder;
+import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.WifiOptionsBuilder;
 
 import java.util.ArrayList;
 
@@ -40,13 +43,13 @@ public class NetViewFragment extends Fragment {
     public void onResume() {
         super.onResume();
         iniWifiClient();
-        localWificlient.autoScanNetwork(2000);
+        localWificlient.autoScanWifiNetwork(2000);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        localWificlient.stopAutoScanNetwork();
+        localWificlient.stopAutoScanWifiNetwork();
     }
 
     @Override
@@ -62,6 +65,7 @@ public class NetViewFragment extends Fragment {
         iniListeners();
         iniWifiClient();
     }
+
 
     private void iniUi() {
         lvWifiNETItems = (ListView) getActivity().findViewById(R.id.lv_wifi_net_items_net_view_fragment);
@@ -79,7 +83,7 @@ public class NetViewFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 WifiListItem item = adapter.getItem(position);
                 if (item.getInfoItem().isConnected()) {
-                    WifiClientModel.getInstance(getActivity()).dissconnectFromNetwork();
+                    //  WifiClientModel.getInstance(getActivity()).dissconnectFromWifiNetwork();
                 } else {
                     SSID = item.getInfoItem().getSSID();
                     keySecure = WifiOptionsBuilder.getWifiSecure(item.getInfoItem().getCapabilities())[0];
@@ -107,18 +111,55 @@ public class NetViewFragment extends Fragment {
                                     }
                                 }
                                 if (secureconfig != null) {
-                                    localWificlient.connectToNetwork(secureconfig);
+                                    localWificlient.connectToWifiNetwork(secureconfig);
                                 }
                             }
                         });
                         dialog.show(getFragmentManager(), "OpenWifiDialog");
                     } else {
-                        localWificlient.connectToNetwork(new NoNETKeyOptions(SSID));
+                        localWificlient.connectToWifiNetwork(new NoNETKeyOptions(SSID));
                     }
                 }
             }
         });
-    }
+        lvWifiNETItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                WifiListItem item = adapter.getItem(position);
+                if (item.getInfoItem().isConnected()) {
+                    final ConnectedDialogMenu dialogMenu = new ConnectedDialogMenu();
+                    dialogMenu.setOnConnectedDialogMenuListener(new ConnectedDialogMenu.OnConnectedDialogMenuListener() {
+                        @Override
+                        public void onItemSelect(int id) {
+                            dialogMenu.dismiss();
+                            switch (id){
+                                case ConnectedDialogMenu.DISSCONNECT_ITEM:{
+                                    localWificlient.dissconnectFromWifiNetwork();
+                                    break;
+                                }
+                                case ConnectedDialogMenu.WIFI_INFO_ITEM:{
+                                    //
+                                    break;
+                                }
+                                case ConnectedDialogMenu.SCAN_WIFI_ITEM:{
+                                    startActivity(new Intent(getActivity(), LocalNetworkScanActivity.class));
+                                    break;
+                                }
+                            }
+                        }
+                    });
+                    dialogMenu.show(getFragmentManager(),"ConnectedDialogMenu");
+
+                } else {
+
+                }
+                    return false;
+                }
+            }
+
+            );
+        }
 
     private void iniWifiClient() {
         localWificlient = WifiClientModel.getInstance(getActivity());
@@ -135,8 +176,8 @@ public class NetViewFragment extends Fragment {
                 if (localWificlient == null) {
                     iniWifiClient();
                 }
-                if (localWificlient.getAutoScanCheckNetwork()) {
-                    localWificlient.stopAutoScanNetwork();
+                if (localWificlient.getAutoScanCheckWifiNetwork()) {
+                    localWificlient.stopAutoScanWifiNetwork();
                 }
                 adapter.removeAll();
                 break;
@@ -145,8 +186,8 @@ public class NetViewFragment extends Fragment {
                 if (localWificlient == null) {
                     iniWifiClient();
                 }
-                if (!localWificlient.getAutoScanCheckNetwork()) {
-                    localWificlient.autoScanNetwork(2000);
+                if (!localWificlient.getAutoScanCheckWifiNetwork()) {
+                    localWificlient.autoScanWifiNetwork(2000);
                 }
 
                 break;

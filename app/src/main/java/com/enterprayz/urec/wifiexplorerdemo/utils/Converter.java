@@ -8,7 +8,7 @@ import com.enterprayz.urec.wifiexplorerdemo.items.APNClientListItem;
 import com.enterprayz.urec.wifiexplorerdemo.items.WifiListItem;
 import com.enterprayz.urec.wifiexplorerlib.items.ClientScanResultItem;
 import com.enterprayz.urec.wifiexplorerlib.items.WifiScanResultsItem;
-import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptionsBuilder;
+import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.WifiOptionsBuilder;
 
 import java.util.ArrayList;
 

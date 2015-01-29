@@ -2,5 +2,8 @@
 <resources>
 
     <string name="app_name">Wifi Explorer</string>
+    <string name="title_activity_local_network_scan">Scan Network</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:id="@+id/fl_detail_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="15dp">
+
+        <com.enterprayz.urec.wifiexplorerdemo.LocalNetScannerView.DetailHostBeanList
+            android:id="@+id/detail_host_bean_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone">
+
+        </com.enterprayz.urec.wifiexplorerdemo.LocalNetScannerView.DetailHostBeanList>
+
+    </RelativeLayout>
+
+    <com.enterprayz.urec.wifiexplorerdemo.LocalNetScannerView.NetScannerList
+        android:id="@+id/cv_local_scan_net_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+
+</RelativeLayout>

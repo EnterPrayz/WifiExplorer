@@ -18,20 +18,18 @@ public class DbMain {
     public static final String OUI_TABLE_NAME = "oui";
     public static final int VENDOR_COLUMN_ID = 1;
     private static final String TAG = DbMain.class.getName();
-    private static String DB_NAME = "device_base.db";
-    private SQLiteDatabase db;
-    private Context context;
+    private static final String DB_NAME = "device_base.db";
+    private static SQLiteDatabase db;
 
 
-    // constructor
-    public DbMain(Context context) {
-        this.context = context;
+
+    public static String getMacDbPath (Context context){
+        return context.getDatabasePath(DB_NAME).getAbsolutePath();
     }
 
-
-    public SQLiteDatabase openDatabase() {
+    public static boolean prepareDatabase(Context context) {
         File dbFile = context.getDatabasePath(DB_NAME);
-
+        db = null;
         if (!dbFile.exists()) {
             try {
                 String absoluteDBPath = dbFile.getAbsolutePath();
@@ -41,16 +39,21 @@ public class DbMain {
                 }
                 dbFile.createNewFile();
 
-                copyDatabase(dbFile);
+                copyDatabase(dbFile, context);
             } catch (IOException e) {
                 throw new RuntimeException("Error creating source database", e);
             }
         }
-
-        return SQLiteDatabase.openDatabase(dbFile.getPath(), null, SQLiteDatabase.OPEN_READONLY);
+        db = SQLiteDatabase.openDatabase(dbFile.getPath(), null, SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+        if (db != null) {
+            db.close();
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    private void copyDatabase(File dbFile) throws IOException {
+    private static void copyDatabase(File dbFile, Context context) throws IOException {
         InputStream is = context.getAssets().open(DB_NAME);
         String[] io = context.getAssets().list("");
         Log.d(TAG, io.length + "");

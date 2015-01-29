@@ -42,7 +42,6 @@ public class OpenWifiDialog extends DialogFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getDialog().setTitle("Title!");
         rootView = inflater.inflate(R.layout.dialog_open_wifi, null);
         iniUi(rootView);
         return rootView;

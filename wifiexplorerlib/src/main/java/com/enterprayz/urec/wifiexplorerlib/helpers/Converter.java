@@ -12,20 +12,22 @@ import java.util.List;
  */
 public class Converter {
 
-    public static ArrayList<WifiScanResultsItem> convertScanResult(List<ScanResult> scanResults,String SSIDofConnectedWifi) {
+    public static ArrayList<WifiScanResultsItem> convertScanResult(List<ScanResult> scanResults, String SSIDofConnectedWifi) {
         ArrayList<WifiScanResultsItem> wifiScanResultsItems = new ArrayList<>();
-        for (ScanResult scanResult : scanResults) {
-            WifiScanResultsItem item = new WifiScanResultsItem();
-            item.setSSID(scanResult.SSID);
-            item.setBSSID(scanResult.BSSID);
-            item.setCapabilities(scanResult.capabilities);
-            item.setFrequency(scanResult.frequency);
-            item.setLevel(scanResult.level);
-            item.setConnected(false);
-            if (scanResult.SSID.equals(SSIDofConnectedWifi)){
-                item.setConnected(true);
+        if (scanResults != null) {
+            for (ScanResult scanResult : scanResults) {
+                WifiScanResultsItem item = new WifiScanResultsItem();
+                item.setSSID(scanResult.SSID);
+                item.setBSSID(scanResult.BSSID);
+                item.setCapabilities(scanResult.capabilities);
+                item.setFrequency(scanResult.frequency);
+                item.setLevel(scanResult.level);
+                item.setConnected(false);
+                if (scanResult.SSID.equals(SSIDofConnectedWifi)) {
+                    item.setConnected(true);
+                }
+                wifiScanResultsItems.add(item);
             }
-            wifiScanResultsItems.add(item);
         }
         return wifiScanResultsItems;
     }

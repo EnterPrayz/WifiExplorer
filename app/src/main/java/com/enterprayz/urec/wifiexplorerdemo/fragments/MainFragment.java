@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import com.enterprayz.urec.wifiexplorerdemo.R;
 import com.enterprayz.urec.wifiexplorerlib.core.WifiClientModel;
 
+import java.lang.reflect.Field;
+
 /**
  * Created by con on 04.01.15.
  */

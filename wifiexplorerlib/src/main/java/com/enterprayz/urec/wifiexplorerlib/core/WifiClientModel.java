@@ -1,8 +1,6 @@
 package com.enterprayz.urec.wifiexplorerlib.core;
 
-import android.app.Activity;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.wifi.WifiConfiguration;
 import android.util.Log;
 
@@ -15,11 +13,18 @@ import com.enterprayz.urec.wifiexplorerlib.interfaces.OnAPNCheckListener;
 import com.enterprayz.urec.wifiexplorerlib.interfaces.OnAPNUsersChangeStateListener;
 import com.enterprayz.urec.wifiexplorerlib.interfaces.OnFinishAPNScanUsersListener;
 import com.enterprayz.urec.wifiexplorerlib.interfaces.OnNETCheckListener;
+import com.enterprayz.urec.wifiexplorerlib.interfaces.OnNetDeviceScanListener;
 import com.enterprayz.urec.wifiexplorerlib.interfaces.OnWifiModuleCheckListener;
 import com.enterprayz.urec.wifiexplorerlib.items.ClientScanResultItem;
+import com.enterprayz.urec.wifiexplorerlib.items.HostBean;
 import com.enterprayz.urec.wifiexplorerlib.items.WifiScanResultsItem;
+import com.enterprayz.urec.wifiexplorerlib.utils.NetInfo;
+import com.enterprayz.urec.wifiexplorerlib.utils.ScannerOptions.BaseScannerConfiguration;
+import com.enterprayz.urec.wifiexplorerlib.utils.ScannerOptions.BaseScannerOptions;
+import com.enterprayz.urec.wifiexplorerlib.utils.ScannerOptions.BaseScannerOptionsBuilder;
+import com.enterprayz.urec.wifiexplorerlib.utils.ScannerOptions.DefaultBaseScannerOptions;
 import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.WifiKeyOptions;
-import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptionsBuilder;
+import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.WifiOptionsBuilder;
 
 import java.util.ArrayList;
 
@@ -32,8 +37,9 @@ public class WifiClientModel {
     private static ClientCore core;
     private Context context;
     private static WifiClientModel mInstance;
-    private static SQLiteDatabase database;
-
+    private static boolean isMacDBPrepared = false;
+    public static String macDBPath = "";
+    private static NetInfo netInfo;
     //Listeners
 
 
@@ -94,18 +100,21 @@ public class WifiClientModel {
         WifiClientModel.netCheckListener = listener;
     }
 
+
     //Body
     private WifiClientModel(Context context) {
         this.context = context;
         core = new ClientCore(this.context);
+        netInfo = new NetInfo(this.context);
+        if (getNETState().equals(WIFI_NET_STATE.CONNECTED)) {
+            netInfo.getFullInfo();
+        }
     }
 
 
     public void onDestroy() {
-        if (database != null) {
-            database.close();
-            database = null;
-        }
+
+
     }
 
     /**
@@ -117,8 +126,8 @@ public class WifiClientModel {
         if (mInstance == null) {
             mInstance = new WifiClientModel(context);
         }
-        if (database == null) {
-            database = new DbMain(context).openDatabase();
+        if (!isMacDBPrepared) {
+            isMacDBPrepared = DbMain.prepareDatabase(context);
         }
         return mInstance;
     }
@@ -142,7 +151,7 @@ public class WifiClientModel {
     /**
      * Scan wifi for new networks. The results is returning in {@link OnNETCheckListener} .onNetworkScanResult.
      */
-    public void scanNetwork() {
+    public void scanWifiNetwork() {
         core.scanWifiNetwork();
     }
 
@@ -151,13 +160,13 @@ public class WifiClientModel {
      *
      * @param dellay through in which time  scan network.
      */
-    public void autoScanNetwork(final int dellay) {
+    public void autoScanWifiNetwork(final int dellay) {
         isAutoScanEnable = true;
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while (isAutoScanEnable && netCheckListener != null) {
-                    scanNetwork();
+                    scanWifiNetwork();
                     try {
                         Thread.sleep(dellay);
                     } catch (InterruptedException e) {
@@ -171,7 +180,7 @@ public class WifiClientModel {
     /**
      * Stop scan monitor
      */
-    public void stopAutoScanNetwork() {
+    public void stopAutoScanWifiNetwork() {
         if (isAutoScanEnable) {
             isAutoScanEnable = false;
         }
@@ -182,7 +191,7 @@ public class WifiClientModel {
      *
      * @return <code>boolean</code> - scanner state
      */
-    public boolean getAutoScanCheckNetwork() {
+    public boolean getAutoScanCheckWifiNetwork() {
         return isAutoScanEnable;
     }
 
@@ -191,7 +200,7 @@ public class WifiClientModel {
      *
      * @param options {@link WifiKeyOptions} configured wifi options.
      */
-    public void connectToNetwork(WifiKeyOptions options) {
+    public void connectToWifiNetwork(WifiKeyOptions options) {
         WifiConfiguration configuration
                 = new WifiOptionsBuilder().getConfig(options);
         core.connectToNetwork(configuration);
@@ -200,18 +209,26 @@ public class WifiClientModel {
     /**
      * Disconnect from connected Wifi network.
      */
-    public void dissconnectFromNetwork() {
+    public void dissconnectFromWifiNetwork() {
         core.disconnectFromNetwork();
     }
 
-    /**
-     * Get SSID of connected Wifi network
-     *
-     * @return <code>String</code> network SSID
-     */
-    public String getSSIDofConnectedWifi() {
-        return core.getSSIDofCurrentWifi();
+
+    public void scanLocalNetwork(OnNetDeviceScanListener listener) {
+        BaseScannerOptions options = new DefaultBaseScannerOptions(netInfo.firstSubNetHostIp, netInfo.lastSubNetHostIp, netInfo.gatewayIp);
+        BaseScannerConfiguration configuration = new BaseScannerOptionsBuilder().getConfig(options);
+        core.scanLocalNetwork(configuration, listener);
     }
+
+    public void scanLocalNetwork(BaseScannerOptions options, OnNetDeviceScanListener listener) {
+        BaseScannerConfiguration configuration = new BaseScannerOptionsBuilder().getConfig(options);
+        core.scanLocalNetwork(configuration, listener);
+    }
+
+    public void cancelScanLocalNetwork() {
+        core.stopScanLocalNetwork();
+    }
+
 
     /**
      * Create APN with configured options.
@@ -248,25 +265,25 @@ public class WifiClientModel {
 
     /**
      * Set APN scanner enabled. Check for user change state.
-     *
      */
     public void startAPNScanMonitor(int dellay) {
         core.setScanMonitorState(true, dellay);
     }
+
     /**
      * Set APN scanner disabled.
-     *
      */
     public void stopAPNScanMonitor() {
         core.setScanMonitorState(false, 0);
     }
+
     /**
      * Get APN scanner state.
-     *
      */
     public boolean getAPNScanMonitorState() {
         return core.getScanMonitorState();
     }
+
     /**
      * Get wifi module mode.
      *
@@ -322,10 +339,6 @@ public class WifiClientModel {
     static class Actions {
         private static String TAG = Actions.class.getName();
 
-        public static SQLiteDatabase getSingletoneDatabase() {
-            return database;
-        }
-
         public static void setOnWifiModuleEnableCheck(WIFI_MODULE_STATE state) {
             if (wifiModuleCheckListener != null) {
 
@@ -358,6 +371,22 @@ public class WifiClientModel {
         }
 
         public static void setOnNETChangeState(WIFI_NET_STATE state) {
+
+            switch (state) {
+                case CONNECTED: {
+                    if (netInfo != null) {
+                        netInfo.getFullInfo();
+                    }
+                    break;
+                }
+                case DISCONNECTED: {
+                    if (netInfo != null) {
+                        netInfo.setInfoDefault();
+                    }
+                    break;
+                }
+            }
+
             if (netCheckListener != null) {
                 netCheckListener.onNetCheckChange(state);
             }
@@ -368,6 +397,8 @@ public class WifiClientModel {
                 netCheckListener.onNetworkScanResult(core.getScanResults());
             }
         }
+
+
     }
 }
 

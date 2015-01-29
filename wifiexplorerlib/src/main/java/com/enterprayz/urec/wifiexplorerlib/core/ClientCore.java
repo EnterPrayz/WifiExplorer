@@ -13,7 +13,11 @@ import com.enterprayz.urec.wifiexplorerlib.enum_state.WIFI_MODULE_STATE;
 import com.enterprayz.urec.wifiexplorerlib.enum_state.WIFI_NET_STATE;
 import com.enterprayz.urec.wifiexplorerlib.helpers.Converter;
 import com.enterprayz.urec.wifiexplorerlib.helpers.WifiNetStateHelper;
+import com.enterprayz.urec.wifiexplorerlib.interfaces.OnNetDeviceScanListener;
 import com.enterprayz.urec.wifiexplorerlib.items.WifiScanResultsItem;
+import com.enterprayz.urec.wifiexplorerlib.utils.NetworkDeviceScanner;
+import com.enterprayz.urec.wifiexplorerlib.utils.ScannerOptions.BaseScannerConfiguration;
+import com.enterprayz.urec.wifiexplorerlib.utils.ScannerOptions.BaseScannerOptions;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -27,6 +31,7 @@ public class ClientCore {
     private Context context;
 
     private ApHelperManager apManager;
+    private NetworkDeviceScanner scanner = null;
 
     public ClientCore(Context context) {
         this.context = context;
@@ -70,6 +75,22 @@ public class ClientCore {
         return Converter.convertScanResult(mWifiManager.getScanResults(), SSID);
     }
 
+    public void scanLocalNetwork(BaseScannerConfiguration configuration, OnNetDeviceScanListener listener) {
+        if (scanner != null && !scanner.isCancelled()) {
+            scanner.cancel(true);
+        }
+
+        scanner = new NetworkDeviceScanner(configuration, context);
+        scanner.setListener(listener);
+        scanner.execute();
+    }
+
+    public void stopScanLocalNetwork(){
+        if (scanner != null && !scanner.isCancelled()) {
+            scanner.cancel(true);
+        }
+    }
+
     public void createAp(WifiConfiguration configuration) {
         apManager.setApNetworkEnable(configuration, true);
     }
@@ -83,15 +104,15 @@ public class ClientCore {
         }).start();
     }
 
-    public void setScanMonitorState (boolean enable, int dellay){
-        apManager.setAPNScanMonitor(dellay,enable);
+    public void setScanMonitorState(boolean enable, int dellay) {
+        apManager.setAPNScanMonitor(dellay, enable);
     }
 
-    public boolean getScanMonitorState (){
-       return apManager.getScanMonitorState();
+    public boolean getScanMonitorState() {
+        return apManager.getScanMonitorState();
     }
 
-    public WifiConfiguration getLastAPNConfiguration (){
+    public WifiConfiguration getLastAPNConfiguration() {
         return apManager.getWifiApConfiguration();
     }
 
@@ -107,7 +128,7 @@ public class ClientCore {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                apManager.getListOfAPNUsers(1000,false);
+                apManager.getListOfAPNUsers(1000, false);
             }
         }).start();
     }

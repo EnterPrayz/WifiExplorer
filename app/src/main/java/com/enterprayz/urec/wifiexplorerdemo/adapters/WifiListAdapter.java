@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.enterprayz.urec.wifiexplorerdemo.R;
 import com.enterprayz.urec.wifiexplorerdemo.items.WifiListItem;
-import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptionsBuilder;
+import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.WifiOptionsBuilder;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

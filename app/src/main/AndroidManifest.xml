@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.enterprayz.urec.wifiexplorerdemo">
+    package="com.enterprayz.urec.wifiexplorerdemo" >
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
-            android:name="com.enterprayz.urec.wifiexplorerdemo.ActivityMain"
+            android:name=".activities.ActivityMain"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
+        <activity
+            android:name=".activities.LocalNetworkScanActivity"
+            android:label="@string/title_activity_local_network_scan"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

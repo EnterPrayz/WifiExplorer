@@ -19,6 +19,7 @@ import com.enterprayz.urec.wifiexplorerlib.core.WifiClientModel;
 import com.enterprayz.urec.wifiexplorerlib.enum_state.WIFI_APN_STATE;
 import com.enterprayz.urec.wifiexplorerlib.items.ClientScanResultItem;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 /**

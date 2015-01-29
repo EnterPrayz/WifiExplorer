@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_main_container_detail_hostbean_view"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/ll_detail_image_container"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:orientation="horizontal"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:id="@+id/tv_vendor_name_detail_hostbean_view"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/wifi_item_sub_title_color"
+                android:text="VENDOR NAME"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_ip_address_container_detail_hostbean_view"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="IP "
+                    android:textColor="@color/wifi_item_sub_title_color"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/tv_ip_address_detail_hostbean_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=" ADDRESS"
+                    android:textColor="@color/wifi_item_sub_title_color"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_margin="15dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_mac_address_container_detail_hostbean_view"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MAC "
+                        android:textColor="@color/wifi_item_sub_title_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_mac_address_detail_hostbean_view"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="MAC "
+                        android:textColor="@color/wifi_item_sub_title_color"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_ping_container_detail_hostbean_view"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PING "
+                        android:textColor="@color/wifi_item_sub_title_color"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_ping_detail_hostbean_view"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="PING "
+                        android:textColor="@color/wifi_item_sub_title_color"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_ports_container_detail_hostbean_view"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_indicator_open_ports_detail_hostbean_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/wifi_item_sub_title_color"
+                        android:textSize="20sp"
+                        android:text="Open ports"/>
+
+                    <ListView
+                        android:id="@+id/lv_opened_ports_detail_hostbean_view"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+
+                    </ListView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

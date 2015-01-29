@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <attr name="fromDegrees" format="float|reference" />
+    <attr name="toDegrees" format="float|reference" />
+    <attr name="childSize" format="dimension|reference" />
+    <attr name="minRadius" format="dimension|reference" />
+    <attr name="detailItemPositionX" format="dimension|reference" />
+    <attr name="detailItemPositionY" format="dimension|reference" />
+    <attr name="detailItemZoomValue" format="integer|reference" />
+    <attr name="childPadding" format="dimension|reference" />
+    <attr name="layoutPadding" format="dimension|reference" />
+
+    <declare-styleable name="NetScannerLayout">
+        <attr name="fromDegrees"/>
+        <attr name="toDegrees"/>
+        <attr name="childSize"/>
+        <attr name="minRadius"/>
+        <attr name="detailItemPositionX"/>
+        <attr name="detailItemPositionY"/>
+        <attr name="childPadding"/>
+        <attr name="layoutPadding"/>
+        <attr name="detailItemZoomValue"/>
+    </declare-styleable>
+
+    <declare-styleable name="NetScannerList">
+        <attr name="fromDegrees"/>
+        <attr name="toDegrees"/>
+        <attr name="childSize"/>
+        <attr name="minRadius"/>
+        <attr name="detailItemPositionX"/>
+        <attr name="detailItemPositionY"/>
+        <attr name="childPadding"/>
+        <attr name="layoutPadding"/>
+        <attr name="detailItemZoomValue"/>
+    </declare-styleable>
+	
+	<declare-styleable name="RayLayout">
+		<attr name="leftHolderWidth" format="dimension" />
+	</declare-styleable>
+
+
+</resources>

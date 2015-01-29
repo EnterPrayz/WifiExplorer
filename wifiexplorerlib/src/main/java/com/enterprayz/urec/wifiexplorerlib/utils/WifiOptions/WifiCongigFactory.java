@@ -5,7 +5,7 @@ import android.net.wifi.WifiConfiguration;
 /**
  * Created by ura on 09.12.14.
  */
-public abstract class Factory {
+public abstract class WifiCongigFactory {
 
     /**
      * Get {@link WifiConfiguration} needed for work with wifi network.

@@ -1,14 +1,11 @@
-package com.enterprayz.urec.wifiexplorerlib.utils;
+package com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions;
 
 import android.net.wifi.WifiConfiguration;
-
-import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.Factory;
-import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.WifiKeyOptions;
 
 /**
  * Created by ura on 08.12.14.
  */
-public class WifiOptionsBuilder extends Factory {
+public class WifiOptionsBuilder extends WifiCongigFactory {
 
     private final String TAG = WifiOptionsBuilder.class.getName();
     private WifiConfiguration configuration;
