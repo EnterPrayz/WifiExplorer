@@ -2,6 +2,7 @@ package com.enterprayz.urec.wifiexplorerlib.core;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiInfo;
 import android.util.Log;
 
 import com.enterprayz.urec.wifiexplorerlib.database.DbMain;
@@ -142,10 +143,15 @@ public class WifiClientModel {
     /**
      * Get Wifi module state
      *
-     * @return {@link boolean} is tunr on/off
+     * @return {@link boolean} is turn on/off
      */
     public boolean isWifiModuleEnabled() {
         return core.isWifiModuleEnabled();
+    }
+
+
+    public NetInfo getNetInfo (){
+        return netInfo;
     }
 
     /**

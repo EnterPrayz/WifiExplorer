@@ -99,9 +99,9 @@ public class ApnListAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.item_apn_list, null);
             holder = new Holder();
             holder.tvHardAddress = (TextView) convertView
-                    .findViewById(R.id.tv_item_hard_address);
+                    .findViewById(R.id.tv_item_sub_title_apn_list);
             holder.tvIpAddress = (TextView) convertView
-                    .findViewById(R.id.tv_item_ip_address);
+                    .findViewById(R.id.tv_item_title_apn_list);
             holder.tvItemVendorName = (TextView) convertView
                     .findViewById(R.id.tv_item_vendor_name);
             convertView.setTag(holder);

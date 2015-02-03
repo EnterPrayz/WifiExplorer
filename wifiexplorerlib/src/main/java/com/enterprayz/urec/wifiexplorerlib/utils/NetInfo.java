@@ -72,7 +72,6 @@ public class NetInfo {
         getIp();
         getWifiInfo();
         getMobileInfo();
-
     }
 
     public void setInfoDefault() {

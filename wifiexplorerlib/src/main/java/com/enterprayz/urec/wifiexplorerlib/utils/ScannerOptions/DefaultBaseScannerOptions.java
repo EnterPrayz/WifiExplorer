@@ -31,7 +31,7 @@ public class DefaultBaseScannerOptions extends BaseScannerOptions {
     public BaseScannerConfiguration getConfig() {
         BaseScannerConfiguration configuration = new BaseScannerConfiguration();
         configuration.setGateIp(getGateIP());
-        configuration.setDPORTS(new int[]{ 20, 21,22, 23, 25, 53, 80, 110, 137, 138 ,139 ,8000, 8080, 3128, 3389, 6588, 1080, 5900, 8888 });
+        configuration.setDPORTS(new int[]{ 20, 21,22, 23, 25, 53, 80, 110, 137, 138 ,139});
         configuration.setTIMEOUT_SCAN(30);
         configuration.setTIMEOUT_SHUTDOWN(10);
         configuration.setTHREADS(10);

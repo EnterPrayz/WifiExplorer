@@ -7,6 +7,7 @@ package com.enterprayz.urec.wifiexplorerdemo.fragments;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +19,13 @@ import com.enterprayz.urec.wifiexplorerdemo.activities.LocalNetworkScanActivity;
 import com.enterprayz.urec.wifiexplorerdemo.adapters.WifiListAdapter;
 import com.enterprayz.urec.wifiexplorerdemo.fragments.dialog.ConnectedDialogMenu;
 import com.enterprayz.urec.wifiexplorerdemo.fragments.dialog.OpenWifiDialog;
+import com.enterprayz.urec.wifiexplorerdemo.fragments.dialog.WifiInfoDialog;
 import com.enterprayz.urec.wifiexplorerdemo.items.WifiListItem;
 import com.enterprayz.urec.wifiexplorerdemo.utils.Converter;
 import com.enterprayz.urec.wifiexplorerlib.core.WifiClientModel;
 import com.enterprayz.urec.wifiexplorerlib.enum_state.WIFI_MODULE_STATE;
 import com.enterprayz.urec.wifiexplorerlib.items.WifiScanResultsItem;
+import com.enterprayz.urec.wifiexplorerlib.utils.NetInfo;
 import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.NoNETKeyOptions;
 import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.WepNETKeyOption;
 import com.enterprayz.urec.wifiexplorerlib.utils.WifiOptions.WifiKeyOptions;
@@ -126,7 +129,7 @@ public class NetViewFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                WifiListItem item = adapter.getItem(position);
+                final WifiListItem item = adapter.getItem(position);
                 if (item.getInfoItem().isConnected()) {
                     final ConnectedDialogMenu dialogMenu = new ConnectedDialogMenu();
                     dialogMenu.setOnConnectedDialogMenuListener(new ConnectedDialogMenu.OnConnectedDialogMenuListener() {
@@ -139,7 +142,9 @@ public class NetViewFragment extends Fragment {
                                     break;
                                 }
                                 case ConnectedDialogMenu.WIFI_INFO_ITEM:{
-                                    //
+                                    WifiInfoDialog infoDialog = new WifiInfoDialog();
+                                    infoDialog.iniList(getActivity(),localWificlient.getNetInfo(), item);
+                                    infoDialog.show(getFragmentManager(),"WifiInfoDialog");
                                     break;
                                 }
                                 case ConnectedDialogMenu.SCAN_WIFI_ITEM:{

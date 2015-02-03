@@ -8,7 +8,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:background="@color/transparent20"
-        android:layout_height="90dp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_weight="1"
@@ -19,19 +19,29 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/tv_item_title_apn_list"
+                android:id="@+id/tv_item_title_item_net_info_list"
                 style="@style/StyleWifiTitleNonSelected"
                 android:text="Title" />
 
             <TextView
-                android:id="@+id/tv_item_sub_title_apn_list"
+                android:id="@+id/tv_item_sub_title_item_net_info_list"
                 style="@style/StyleWifiSubTitleNonSelected"
                 android:text="Sub item name" />
 
-            <TextView
-                android:id="@+id/tv_item_vendor_name"
-                style="@style/StyleWifiVendorNonSelected"
-                android:text="" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_wifi_strength_indicator_item_net_info_list"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
         </LinearLayout>
 
     </LinearLayout>

@@ -8,7 +8,8 @@
 
     <color name="transparent">#00000000</color>
     <color name="transparent20">#20000000</color>
-
+    <color name="transparent80">#80000000</color>
+    <color name="black">#ff000000</color>
     <color name="progress_start">#8e0052ff</color>
     <color name="cian">#ff33b4e3</color>
     <color name="progress_end">#00000000</color>
