@@ -94,7 +94,7 @@ public class ApnViewFragment extends Fragment {
     }
 
     private void iniWifiClient() {
-        localWificlient = WifiClientModel.getInstance(getActivity());
+        localWificlient = WifiClientModel.getInstance();
     }
 
     public void onGetAPNUsers(final ArrayList<ClientScanResultItem> clients) {

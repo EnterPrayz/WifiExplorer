@@ -167,7 +167,7 @@ public class NetViewFragment extends Fragment {
         }
 
     private void iniWifiClient() {
-        localWificlient = WifiClientModel.getInstance(getActivity());
+        localWificlient = WifiClientModel.getInstance();
     }
 
     public void onNetworkScanResult(ArrayList<WifiScanResultsItem> results) {

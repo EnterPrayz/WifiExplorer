@@ -47,7 +47,7 @@ public class MainFragment extends Fragment {
     }
 
     private void iniWifiClient() {
-        localWificlient = WifiClientModel.getInstance(getActivity());
+        localWificlient = WifiClientModel.getInstance();
     }
 
 

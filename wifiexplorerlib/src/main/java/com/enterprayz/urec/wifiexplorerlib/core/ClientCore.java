@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Created by ura on 08.12.14.
  */
-public class ClientCore {
+public final class ClientCore {
     private final WifiManager mWifiManager;
     private Context context;
 

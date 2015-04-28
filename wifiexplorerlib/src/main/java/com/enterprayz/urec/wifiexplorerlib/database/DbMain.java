@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 
-public class DbMain {
+public final class DbMain {
 
     public static final String MAC_COLUMN_NAME = "mac";
     public static final String VENDOR_COLUMN_NAME = "vendor";

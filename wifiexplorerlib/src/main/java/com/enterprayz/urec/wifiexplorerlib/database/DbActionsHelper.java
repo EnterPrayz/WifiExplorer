@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DbActionsHelper {
+public final class DbActionsHelper {
 
     private final static String TAG = "HardwareAddress";
     private final static String SELECT_VENDOR_FROM_OUI_WHERE_MAC = "select vendor from oui where mac=?";

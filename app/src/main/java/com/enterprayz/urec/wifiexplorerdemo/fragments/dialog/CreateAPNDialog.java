@@ -65,7 +65,7 @@ public class CreateAPNDialog extends DialogFragment {
     }
 
     private void iniUi(View rootView) {
-        localWifiClient = WifiClientModel.getInstance(getActivity());
+        localWifiClient = WifiClientModel.getInstance();
         etInputApnName = (EditText) rootView.findViewById(R.id.et_input_apn_name);
         etInputApnPass = (EditText) rootView.findViewById(R.id.et_input_apn_pass);
         chbxNeedToHide = (CheckBox) rootView.findViewById(R.id.chbx_need_to_hide);

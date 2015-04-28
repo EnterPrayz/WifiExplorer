@@ -18,6 +18,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".core.App"
         android:label="@string/app_name"
         android:icon="@drawable/ic_launcher">
         <receiver android:name="com.enterprayz.urec.wifiexplorerlib.core.WifiModuleStateReseirver">

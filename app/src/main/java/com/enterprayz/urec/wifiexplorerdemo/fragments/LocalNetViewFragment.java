@@ -190,7 +190,7 @@ public class LocalNetViewFragment extends Fragment {
 
 
     private void iniWifiClient() {
-        localWificlient = WifiClientModel.getInstance(getActivity());
+        localWificlient = WifiClientModel.getInstance();
     }
 
 }

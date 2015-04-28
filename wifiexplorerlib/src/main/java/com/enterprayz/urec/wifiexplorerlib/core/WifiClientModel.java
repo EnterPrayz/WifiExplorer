@@ -34,7 +34,7 @@ import java.util.ArrayList;
  *
  * @author Uriy Prayzner (urecki22@gmail.com)
  */
-public class WifiClientModel {
+public final class WifiClientModel {
     private static ClientCore core;
     private Context context;
     private static WifiClientModel mInstance;
@@ -123,12 +123,12 @@ public class WifiClientModel {
      *
      * @return {@link WifiClientModel} singleton
      */
-    public static WifiClientModel getInstance(Context context) {
+    public static WifiClientModel getInstance() {
         if (mInstance == null) {
-            mInstance = new WifiClientModel(context);
+            mInstance = new WifiClientModel(App.getContext());
         }
         if (!isMacDBPrepared) {
-            isMacDBPrepared = DbMain.prepareDatabase(context);
+            isMacDBPrepared = DbMain.prepareDatabase(App.getContext());
         }
         return mInstance;
     }

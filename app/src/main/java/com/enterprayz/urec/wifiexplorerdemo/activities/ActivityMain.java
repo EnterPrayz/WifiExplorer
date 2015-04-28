@@ -111,7 +111,7 @@ public class ActivityMain extends Activity implements
     }
 
     private void iniWifiClient() {
-        localWificlient = WifiClientModel.getInstance(getApplicationContext());
+        localWificlient = WifiClientModel.getInstance();
         localWificlient.setOnNetCheckListener(this);
         localWificlient.setWifiModuleCheckListener(this);
         localWificlient.setAPNUserChangeStateListener(this);

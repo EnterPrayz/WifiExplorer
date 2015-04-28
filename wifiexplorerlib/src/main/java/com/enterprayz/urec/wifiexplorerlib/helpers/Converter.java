@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by con on 28.12.14.
  */
-public class Converter {
+public final class Converter {
 
     public static ArrayList<WifiScanResultsItem> convertScanResult(List<ScanResult> scanResults, String SSIDofConnectedWifi) {
         ArrayList<WifiScanResultsItem> wifiScanResultsItems = new ArrayList<>();
